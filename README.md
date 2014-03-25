@@ -29,7 +29,7 @@ The full action argument pattern can be a bit tedious, so use a Seneca _pin_ to 
 var cache = seneca.pin({role:'cache', cmd:'*'});
 
 cache.set({key: 'k1', val: 'v1'}, function(err) {
-  cache.get({key:'k1'}, function(err, val) {
+  cache.get({key:'k1'}, function(err, out) {
     console.log('value = ' + out.val);
   });
 });
