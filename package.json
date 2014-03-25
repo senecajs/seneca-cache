@@ -15,7 +15,10 @@
     "cache",
     "plugin"
   ],
-  "author": "Seamus D'Arcy <darsee@gmail.com>",
+  "contributors": [
+    "Richard Rodger (http://richardrodger.com/)",
+    "Seamus D'Arcy"
+  ],
   "license": "MIT",
   "dependencies": {
     "lru-cache": "^2.5.0"
