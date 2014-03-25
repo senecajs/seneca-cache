@@ -46,39 +46,26 @@ module.exports = function(options, register) {
     cb(null, {key: args.key});
   };
 
-  cmds.incr = function(args, cb) {
-    var key = args.key;
-    var val = args.val;
+  function incrdecr(kind) {
+    return function(args, cb) {
+      var key = args.key;
+      var val = args.val;
 
-    if (!cache.has(key)) {
-      return cb(new Error('incr failed - key ' + key + ' does not exist'));
+      var oldVal = cache.get(key);
+      if (!oldVal) {
+        return cb(new Error(kind + ' failed - key ' + key + ' does not exist'));
+      }
+      if (typeof oldVal !== 'number') {
+        return cb(new Error(kind + ' failed - value for key ' + key + ' is not a number'));
+      }
+      var newVal = kind === 'decr' ? oldVal - val : oldVal + val;
+      cache.set(key, newVal);
+      cb(null, {val: newVal});
     }
+  }
 
-    var oldVal = cache.get(key);
-    if (typeof oldVal !== 'number') {
-      return cb(new Error('incr failed - value for key ' + key + ' is not a number'));
-    }
-    var newVal = oldVal + 1;
-    cache.set(key, newVal);
-    cb(null, {val: newVal});
-  };
-
-  cmds.decr = function(args, cb) {
-    var key = args.key;
-    var val = args.val;
-
-    if (!cache.has(key)) {
-      return cb(new Error('decr failed - key ' + key + ' does not exist'));
-    }
-
-    var oldVal = cache.get(key);
-    if (typeof oldVal !== 'number') {
-     return cb(new Error('decr failed - value for key ' + key + ' is not a number'));
-    }
-    var newVal = oldVal - 1;
-    cache.set(key, newVal);
-    cb(null, {val: newVal});
-  };
+  cmds.incr = incrdecr('incr');
+  cmds.decr = incrdecr('decr');
 
   cmds.peek = function(args, cb) {
     var val = cache.peek(args.key);
