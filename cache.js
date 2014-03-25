@@ -7,7 +7,7 @@ module.exports = function(options, register) {
   var seneca = this;
 
   options = seneca.util.deepextend({
-    cache: {
+    lrucache: {
       maxAge: 1000 * 60 * 60,
       length: function(n) { return n.length },
     }
@@ -108,7 +108,7 @@ module.exports = function(options, register) {
   seneca.add({role: role, cmd: 'values'}, cmds.values);
 
   seneca.add({init: name}, function(args, done) {
-    cache = LRU(options.cache);
+    cache = LRU(options.lrucache);
     done();
   });
 
