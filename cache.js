@@ -35,9 +35,10 @@ module.exports = function(options, register) {
   cmds.add = function(args, cb) {
     var key = args.key;
     var val = args.val;
-    if (!cache.has(key)) {
-      cache.set(key, val);
+    if (cache.has(key)) {
+      return cb(new Error('add failed - key ' + key + ' already exists'));
     }
+    cache.set(key, val);
     cb(null, {key: key});
   };
 
