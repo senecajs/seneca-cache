@@ -1,0 +1,27 @@
+{
+  "name": "seneca-cached",
+  "version": "0.0.1",
+  "description": "In-memory caching plugin for seneca",
+  "main": "cache.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darsee/seneca-cache.git"
+  },
+  "keywords": [
+    "seneca",
+    "cache",
+    "plugin"
+  ],
+  "author": "Seamus D'Arcy <darsee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lru-cache": "^2.5.0"
+  },
+  "devDependencies": {
+    "seneca": "^0.5.15",
+    "mocha": "^1.18.2"
+  }
+}
