@@ -1,5 +1,5 @@
 {
-  "name": "seneca-cached",
+  "name": "seneca-cache",
   "version": "0.0.1",
   "description": "In-memory caching plugin for seneca",
   "main": "cache.js",
