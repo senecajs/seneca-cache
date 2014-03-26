@@ -16,9 +16,11 @@ This code snippet sets a value and then retrieves it.
 var seneca = require('seneca')();
 seneca.use('cache');
 
-seneca.act({role: 'cache', cmd: 'set', key: 'k1', val: 'v1'}, function(err) {
-  seneca.act({role: 'cache', cmd: 'get', key: 'k1'}, function(err, out) {
-    console.log('value = ' + out.val)
+seneca.ready(function(err) {
+  seneca.act({role: 'cache', cmd: 'set', key: 'k1', val: 'v1'}, function(err) {
+    seneca.act({role: 'cache', cmd: 'get', key: 'k1'}, function(err, out) {
+      console.log('value = ' + out.val)
+    });
   });
 });
 ```
