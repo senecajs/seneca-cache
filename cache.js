@@ -23,28 +23,27 @@ module.exports = function(options, register) {
     var key = args.key;
     var val = args.val;
     cache.set(key, val);
-    cb(null, {key: key});
+    cb(null, key);
   };
 
   cmds.get = function(args, cb) {
     var key = args.key;
     var val = cache.get(key);
-    cb(null, {val: val});
+    cb(null, val);
   };
 
   cmds.add = function(args, cb) {
     var key = args.key;
     var val = args.val;
-    if (cache.has(key)) {
-      return cb(new Error('add failed - key ' + key + ' already exists'));
+    if (!cache.has(key)) {
+      cache.set(key, val);
     }
-    cache.set(key, val);
-    cb(null, {key: key});
+    cb(null, key);
   };
 
   cmds.delete = function(args, cb) {
     cache.del(args.key);
-    cb(null, {key: args.key});
+    cb(null, args.key);
   };
 
   function incrdecr(kind) {
@@ -53,15 +52,13 @@ module.exports = function(options, register) {
       var val = args.val;
 
       var oldVal = cache.get(key);
-      if (!oldVal) {
-        return cb(new Error(kind + ' failed - key ' + key + ' does not exist'));
-      }
+      if (!oldVal) return cb(null);
       if (typeof oldVal !== 'number') {
         return cb(new Error(kind + ' failed - value for key ' + key + ' is not a number'));
       }
       var newVal = kind === 'decr' ? oldVal - val : oldVal + val;
       cache.set(key, newVal);
-      cb(null, {val: newVal});
+      cb(null, newVal);
     }
   }
 
@@ -70,7 +67,7 @@ module.exports = function(options, register) {
 
   cmds.peek = function(args, cb) {
     var val = cache.peek(args.key);
-    cb(null, {val: val});
+    cb(null, val);
   };
 
   cmds.reset = function(cb) {
@@ -80,17 +77,17 @@ module.exports = function(options, register) {
 
   cmds.has = function(args, cb) {
     var has = cache.has(args.key);
-    cb(null, {has: has});
+    cb(null, has);
   };
 
   cmds.keys = function(args, cb) {
     var keys = cache.keys();
-    cb(null, {keys: keys});
+    cb(null, keys);
   };
 
   cmds.values = function(args, cb) {
     var values = cache.values();
-    cb(null, {values: values});
+    cb(null, values);
   };
 
   // cache role
