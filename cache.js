@@ -27,7 +27,7 @@ module.exports = function(options) {
   seneca.add({role: plugin, cmd: 'incr'},   incrdecr('incr'));
   seneca.add({role: plugin, cmd: 'decr'},   incrdecr('decr'));
 
-  seneca.add({role: plugin, get: 'impl'},   get_impl );
+  seneca.add({role: plugin, get: 'native'},   get_native );
 
   // lru-cache specific patterns
   seneca.add({role: plugin, cmd: 'peek'},   cmd_peek);
@@ -82,7 +82,7 @@ module.exports = function(options) {
   }
 
 
-  function get_impl(args, done) {
+  function get_native(args, done) {
     done(null,cache)
   }
 
