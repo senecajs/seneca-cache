@@ -8,6 +8,11 @@ It also exposes some lru-cache specific actions (`peek`, `has`, `keys`, `values`
 By moving cache operations into Seneca, you can change your cache implementation or business rules at a later point.
 For example, you might decide to send certain kinds of keys to a different cache mechanism, such as redis.
 
+Current Version: 0.1.2
+
+Tested on: Seneca 0.5.21, Node 0.10.31
+
+
 ### Quick example
 
 This code snippet sets a value and then retrieves it.
