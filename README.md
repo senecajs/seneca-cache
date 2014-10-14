@@ -1,6 +1,6 @@
 # seneca-cache
 
-### Node.js Seneca in-memory caching module
+### Node.js Seneca in-memory caching module.
 
 This module is a plugin for the [Seneca framework](http://senecajs.org). It provides a set of common caching actions (`get`, `set` etc.), backed by [lru-cache](https://github.com/isaacs/node-lru-cache).
 It also exposes some lru-cache specific actions (`peek`, `has`, `keys`, `values`, `reset`).
