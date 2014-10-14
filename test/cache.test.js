@@ -2,122 +2,73 @@
 /*global describe, it */
 "use strict";
 
-var seneca = require('seneca')();
+var seneca = require('seneca')({log:'silent'});
 seneca.use('..');
 
 var assert = require('assert');
 
+var standard = require('../../seneca-cache-test')
+
 describe('cache', function() {
+
+  it('basic',function(done){
+    standard.basictest(seneca,done)
+  })
 
   var cache = seneca.pin({role: 'cache', cmd: '*'});
 
-  it('set', function(cb) {
-    cache.set({key: 'a', val: '1'}, function(err, out) {
-      assert.equal(err, null);
-      assert(out, 'a');
-      cb();
-    });
-  });
 
-  it('get', function(cb) {
-    cache.get({key: 'a'}, function(err, out) {
-      assert.equal(err, null);
-      assert.equal(out, '1');
-      cb();
-    });
-  });
+  it('set', function(fin) {
+    cache.set({key: 'x', val: '10'}, function(err, out) {
+      if(err) return fin(err);
 
-  it('add', function(cb) {
-    cache.add({key: 'b', val: 1}, function(err, out) {
-      assert.equal(err, null);
-      assert.equal(out, 'b');
-      cb();
-    });
-  });
+      cache.set({key: 'y', val: 20}, function(err, out) {
+        fin(err);
+      })
+    })
+  })
 
-  it('won\'t add exsting key', function(cb) {
-    cache.add({key: 'b', val: 'something'}, function(err, out) {
-      assert.equal(err, null);
-      cache.get({key: 'b'}, function(err, out) {
-        assert.equal(out, 1);
-        cb();
+
+  it('peek', function(fin) {
+    cache.peek({key: 'x'}, function(err, out) {
+      if(err) return fin(err);
+      assert.equal(out, '10');
+
+      cache.peek({key: 'y'}, function(err, out) {
+        if(err) return fin(err);
+        assert.equal(out, 20);
+
+        fin();
       });
     });
   });
 
-  it('incr', function(cb) {
-    cache.incr({key: 'b', val: 4}, function(err, out) {
-      assert.equal(err, null);
-      assert.equal(out, 5);
-      cb();
-    });
-  });
 
-  it('decr', function(cb) {
-    cache.decr({key: 'b', val: 3}, function(err, out) {
-      assert.equal(err, null);
-      assert.equal(out, 2);
-      cb();
-    });
-  });
-
-  it('won\'t incr unless value is an integer', function(cb) {
-    cache.incr({key: 'a', val: 1}, function(err, out) {
-      assert(err);
-      cb();
-    });
-  });
-
-
-  it('won\'t decr if value is not an integer', function(cb) {
-    cache.decr({key: 'a', val: 1}, function(err, out) {
-      assert(err);
-      cb();
-    });
-  });
-
-  it('peek', function(cb) {
-    cache.peek({key: 'a'}, function(err, out) {
-      assert.equal(err, null);
-      assert.equal(out, '1');
-      cb();
-    });
-  });
-
-  it('has', function(cb) {
-    cache.has({key: 'a'}, function(err, out) {
-      assert.equal(err, null);
+  it('has', function(fin) {
+    cache.has({key: 'x'}, function(err, out) {
+      if(err) return fin(err);
       assert(out);
-      cb();
+      fin();
     });
   });
 
-  it('keys', function(cb) {
+
+  it('keys', function(fin) {
     cache.keys({}, function(err, out) {
-      assert.equal(err, null);
-      assert.deepEqual(out, ['a', 'b']);
-      cb();
+      if(err) return fin(err);
+      assert.deepEqual(out.sort(), ['x', 'y']);
+      fin();
     });
   });
 
-  it('values', function(cb) {
+
+  it('values', function(fin) {
     cache.values({}, function(err, out) {
-      assert.equal(err, null);
-      assert.deepEqual(out, ['1', 2]);
-      cb();
+      if(err) return fin(err);
+      assert.deepEqual(out.sort(), ['10', 20]);
+      fin();
     });
   });
 
-  it('delete', function(cb) {
-    cache.delete({key: 'a'}, function(err, out) {
-      assert.equal(err, null);
-      assert(out, 'a');
-      cache.has({key: 'a'}, function(err, out) {
-        assert.equal(err, null);
-        assert.equal(out, false);
-        cb();
-      });
-    });
-  });
 
 })

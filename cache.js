@@ -1,115 +1,117 @@
-/* Copyright (c) 2014 Seamus D'Arcy */
+/* Copyright (c) 2014 Seamus D'Arcy, MIT License */
 "use strict";
 
 var LRU = require('lru-cache');
 
-module.exports = function(options, register) {
+module.exports = function(options) {
   var seneca = this;
+  var plugin   = 'cache';
 
   options = seneca.util.deepextend({
     lrucache: {
+      max:    9999,
       maxAge: 1000 * 60 * 60,
       length: function(n) { return n.length },
     }
   }, options);
 
-  var cmds = {};
-  var name = 'cache';
-  var role = 'cache';
 
-  var cache;
+  var cache = LRU(options.lrucache);
 
-  cmds.set = function(args, cb) {
+
+  // cache patterns
+  seneca.add({role: plugin, cmd: 'set'},    cmd_set);
+  seneca.add({role: plugin, cmd: 'get'},    cmd_get);
+  seneca.add({role: plugin, cmd: 'add'},    cmd_add);
+  seneca.add({role: plugin, cmd: 'delete'}, cmd_delete);
+  seneca.add({role: plugin, cmd: 'incr'},   incrdecr('incr'));
+  seneca.add({role: plugin, cmd: 'decr'},   incrdecr('decr'));
+
+  seneca.add({role: plugin, get: 'impl'},   get_impl );
+
+  // lru-cache specific patterns
+  seneca.add({role: plugin, cmd: 'peek'},   cmd_peek);
+  seneca.add({role: plugin, cmd: 'reset'},  cmd_reset);
+  seneca.add({role: plugin, cmd: 'has'},    cmd_has);
+  seneca.add({role: plugin, cmd: 'keys'},   cmd_keys);
+  seneca.add({role: plugin, cmd: 'values'}, cmd_values);
+
+
+  function cmd_set(args, done) {
     var key = args.key;
     var val = args.val;
     cache.set(key, val);
-    cb(null, key);
+    done(null, key);
   };
 
-  cmds.get = function(args, cb) {
+  function cmd_get(args, done) {
     var key = args.key;
     var val = cache.get(key);
-    cb(null, val);
+    done(null, val);
   };
 
-  cmds.add = function(args, cb) {
+  function cmd_add(args, done) {
     var key = args.key;
     var val = args.val;
     if (!cache.has(key)) {
       cache.set(key, val);
     }
-    cb(null, key);
+    done(null, key);
   };
 
-  cmds.delete = function(args, cb) {
+  function cmd_delete(args, done) {
     cache.del(args.key);
-    cb(null, args.key);
+    done(null, args.key);
   };
+
 
   function incrdecr(kind) {
-    return function(args, cb) {
+    return function(args, done) {
       var key = args.key;
       var val = args.val;
 
       var oldVal = cache.get(key);
-      if (!oldVal) return cb(null);
+      if (!oldVal) return done(null);
       if (typeof oldVal !== 'number') {
-        return cb(new Error(kind + ' failed - value for key ' + key + ' is not a number'));
+        return done(new Error(kind + ' failed - value for key ' + key + ' is not a number'));
       }
       var newVal = kind === 'decr' ? oldVal - val : oldVal + val;
       cache.set(key, newVal);
-      cb(null, newVal);
+      done(null, newVal);
     }
   }
 
-  cmds.incr = incrdecr('incr');
-  cmds.decr = incrdecr('decr');
 
-  cmds.peek = function(args, cb) {
+  function get_impl(args, done) {
+    done(null,cache)
+  }
+
+
+  function cmd_peek(args, done) {
     var val = cache.peek(args.key);
-    cb(null, val);
+    done(null, val);
   };
 
-  cmds.reset = function(cb) {
+  function cmd_reset(done) {
     cache.reset();
-    cb(null);
+    done(null);
   };
 
-  cmds.has = function(args, cb) {
+  function cmd_has(args, done) {
     var has = cache.has(args.key);
-    cb(null, has);
+    done(null, has);
   };
 
-  cmds.keys = function(args, cb) {
+  function cmd_keys(args, done) {
     var keys = cache.keys();
-    cb(null, keys);
+    done(null, keys);
   };
 
-  cmds.values = function(args, cb) {
+  function cmd_values(args, done) {
     var values = cache.values();
-    cb(null, values);
+    done(null, values);
   };
 
-  // cache role
-  seneca.add({role: role, cmd: 'set'}, cmds.set);
-  seneca.add({role: role, cmd: 'get'}, cmds.get);
-  seneca.add({role: role, cmd: 'add'}, cmds.add);
-  seneca.add({role: role, cmd: 'delete'}, cmds.delete);
-  seneca.add({role: role, cmd: 'incr'}, cmds.incr);
-  seneca.add({role: role, cmd: 'decr'}, cmds.decr);
 
-  // lru-cache specific
-  seneca.add({role: role, cmd: 'peek'}, cmds.peek);
-  seneca.add({role: role, cmd: 'reset'}, cmds.reset);
-  seneca.add({role: role, cmd: 'has'}, cmds.has);
-  seneca.add({role: role, cmd: 'keys'}, cmds.keys);
-  seneca.add({role: role, cmd: 'values'}, cmds.values);
-
-  seneca.add({init: name}, function(args, done) {
-    cache = LRU(options.lrucache);
-    done();
-  });
-
-  register(null, {name: name});
-
+  return {name: plugin};
 };
