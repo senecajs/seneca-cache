@@ -30,11 +30,11 @@ module.exports = function(options) {
   seneca.add({role: plugin, get: 'native'},   get_native );
 
   // lru-cache specific patterns
-  seneca.add({role: plugin, cmd: 'peek'},   cmd_peek);
-  seneca.add({role: plugin, cmd: 'reset'},  cmd_reset);
-  seneca.add({role: plugin, cmd: 'has'},    cmd_has);
-  seneca.add({role: plugin, cmd: 'keys'},   cmd_keys);
-  seneca.add({role: plugin, cmd: 'values'}, cmd_values);
+  seneca.add({role: 'lrucache', cmd: 'peek'},   cmd_peek);
+  seneca.add({role: 'lrucache', cmd: 'reset'},  cmd_reset);
+  seneca.add({role: 'lrucache', cmd: 'has'},    cmd_has);
+  seneca.add({role: 'lrucache', cmd: 'keys'},   cmd_keys);
+  seneca.add({role: 'lrucache', cmd: 'values'}, cmd_values);
 
 
   function cmd_set(args, done) {
@@ -56,6 +56,8 @@ module.exports = function(options) {
     if (!cache.has(key)) {
       cache.set(key, val);
     }
+    else return done(new Error('key exists: '+key))
+
     done(null, key);
   };
 

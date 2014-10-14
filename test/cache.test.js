@@ -15,7 +15,9 @@ describe('cache', function() {
     standard.basictest(seneca,done)
   })
 
+
   var cache = seneca.pin({role: 'cache', cmd: '*'});
+  var lrucache = seneca.pin({role: 'lrucache', cmd: '*'});
 
 
   it('set', function(fin) {
@@ -30,11 +32,11 @@ describe('cache', function() {
 
 
   it('peek', function(fin) {
-    cache.peek({key: 'x'}, function(err, out) {
+    lrucache.peek({key: 'x'}, function(err, out) {
       if(err) return fin(err);
       assert.equal(out, '10');
 
-      cache.peek({key: 'y'}, function(err, out) {
+      lrucache.peek({key: 'y'}, function(err, out) {
         if(err) return fin(err);
         assert.equal(out, 20);
 
@@ -45,7 +47,7 @@ describe('cache', function() {
 
 
   it('has', function(fin) {
-    cache.has({key: 'x'}, function(err, out) {
+    lrucache.has({key: 'x'}, function(err, out) {
       if(err) return fin(err);
       assert(out);
       fin();
@@ -54,7 +56,7 @@ describe('cache', function() {
 
 
   it('keys', function(fin) {
-    cache.keys({}, function(err, out) {
+    lrucache.keys({}, function(err, out) {
       if(err) return fin(err);
       assert.deepEqual(out.sort(), ['x', 'y']);
       fin();
@@ -63,7 +65,7 @@ describe('cache', function() {
 
 
   it('values', function(fin) {
-    cache.values({}, function(err, out) {
+    lrucache.values({}, function(err, out) {
       if(err) return fin(err);
       assert.deepEqual(out.sort(), ['10', 20]);
       fin();
