@@ -7,7 +7,7 @@ seneca.use('..');
 
 var assert = require('assert');
 
-var standard = require('../../seneca-cache-test')
+var standard = require('seneca-cache-test')
 
 describe('cache', function() {
 
