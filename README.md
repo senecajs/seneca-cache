@@ -12,6 +12,8 @@ Current Version: 0.1.2
 
 Tested on: Seneca 0.5.21, Node 0.10.31
 
+[![Build Status](https://travis-ci.org/darsee/seneca-cache.png?branch=master)](https://travis-ci.org/darsee/seneca-cache)
+
 
 ### Quick example
 

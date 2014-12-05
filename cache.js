@@ -73,11 +73,12 @@ module.exports = function(options) {
       var val = args.val;
 
       var oldVal = cache.get(key);
-      if (!oldVal) return done(null);
+      if ( null == oldVal ) return done(null);
       if (typeof oldVal !== 'number') {
         return done(new Error(kind + ' failed - value for key ' + key + ' is not a number'));
       }
       var newVal = kind === 'decr' ? oldVal - val : oldVal + val;
+
       cache.set(key, newVal);
       done(null, newVal);
     }
