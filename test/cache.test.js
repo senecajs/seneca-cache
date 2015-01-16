@@ -72,5 +72,16 @@ describe('cache', function() {
     });
   });
 
+  it('reset', function(fin) {
+    lrucache.reset({}, function(err, out) {
+      if(err) return fin(err);
+      lrucache.keys({}, function(err, out) {
+        if(err) return fin(err);
+        assert.equal(out.length, 0);
+        fin();
+      });
+    });
+  });
 
-})
+
+});

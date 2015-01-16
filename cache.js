@@ -95,7 +95,7 @@ module.exports = function(options) {
     done(null, val);
   };
 
-  function cmd_reset(done) {
+  function cmd_reset(args, done) {
     cache.reset();
     done(null);
   };
