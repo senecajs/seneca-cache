@@ -4,7 +4,8 @@
   "description": "In-memory caching plugin for seneca",
   "main": "cache.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha test/*.test.js"
+    "test": "node_modules/.bin/mocha test/*.test.js $LAB_FLAGS",
+    "test:node6": "LAB_FLAGS='--leaks' && npm test"
   },
   "repository": {
     "type": "git",
