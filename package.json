@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node_modules/.bin/mocha test/*.test.js $LAB_FLAGS",
     "test:node6": "LAB_FLAGS='--leaks' && npm test",
-    "coverage": "lab -s test/*test.js  -r lcov | coveralls"
+    "coverage": "lab test/*test.js -v  -r lcov | coveralls"
   },
   "repository": {
     "type": "git",

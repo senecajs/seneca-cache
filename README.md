@@ -6,6 +6,7 @@
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![Dependency Status][david-badge]][david-url]
+[![Coveralls][BadgeCoveralls]][Coveralls]
 [![Gitter][gitter-badge]][gitter-url]
 
 ## Description
@@ -110,3 +111,5 @@ Licensed under [MIT][].
 [gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
 [gitter-url]: https://gitter.im/rjrodger/seneca
 [Senecajs org]: https://github.com/senecajs/
+[Coveralls]: https://coveralls.io/github/senecajs/seneca-cache?branch=master
+[BadgeCoveralls]: https://coveralls.io/repos/github/senecajs/seneca-cache/badge.svg?branch=master
