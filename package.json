@@ -4,13 +4,13 @@
   "description": "In-memory caching plugin for seneca",
   "main": "cache.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha test/*.test.js $LAB_FLAGS",
+    "test": "lab test/*.test.js -r console -v -L $LAB_FLAGS",
     "test:node6": "LAB_FLAGS='--leaks' && npm test",
-    "coverage": "lab test/*test.js -v  -r lcov | coveralls"
+    "coverage": "lab test/*.test.js -v -r lcov | coveralls"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/darsee/seneca-cache.git"
+    "url": "https://github.com/senecajs/seneca-cache.git"
   },
   "keywords": [
     "seneca",
@@ -29,9 +29,12 @@
     "seneca": "*"
   },
   "devDependencies": {
-    "mocha": "~1.20.1",
     "seneca": "~0.5.21",
     "seneca-cache-test": "~0.2.0",
-    "coveralls": "2.11.x"
+    "eslint-config-seneca": "1.x.x",
+    "eslint-plugin-standard": "1.x.x",
+    "coveralls": "2.11.x",
+    "lab": "6.2.0",
+    "code": "1.5.x"
   }
 }
