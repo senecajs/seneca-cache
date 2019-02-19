@@ -23,7 +23,6 @@ var seneca = Seneca()
   .quiet()
   .use(Plugin)
 
-
 lab.test(
   'validate',
   Util.promisify(function(x, fin) {
@@ -56,11 +55,14 @@ describe('cache', function() {
   })
 
   it('peek', function(fin) {
-    seneca.act({role:'lrucache', cmd:'peek',  key: 'x' }, function(err, out) {
+    seneca.act({ role: 'lrucache', cmd: 'peek', key: 'x' }, function(err, out) {
       if (err) return fin(err)
       assert.equal(out.value, '10')
 
-      seneca.act({role:'lrucache', cmd:'peek',  key: 'y' }, function(err, out) {
+      seneca.act({ role: 'lrucache', cmd: 'peek', key: 'y' }, function(
+        err,
+        out
+      ) {
         if (err) return fin(err)
         assert.equal(out.value, 20)
 
@@ -70,7 +72,7 @@ describe('cache', function() {
   })
 
   it('has', function(fin) {
-    seneca.act({role:'lrucache', cmd:'has',  key: 'x' }, function(err, out) {
+    seneca.act({ role: 'lrucache', cmd: 'has', key: 'x' }, function(err, out) {
       if (err) return fin(err)
       assert(out)
       fin()
@@ -78,7 +80,7 @@ describe('cache', function() {
   })
 
   it('keys', function(fin) {
-    seneca.act({role:'lrucache', cmd:'keys', }, function(err, out) {
+    seneca.act({ role: 'lrucache', cmd: 'keys' }, function(err, out) {
       if (err) return fin(err)
       assert.deepEqual(out.keys.sort(), ['x', 'y'])
       fin()
@@ -86,7 +88,7 @@ describe('cache', function() {
   })
 
   it('values', function(fin) {
-    seneca.act({role:'lrucache', cmd:'values', }, function(err, out) {
+    seneca.act({ role: 'lrucache', cmd: 'values' }, function(err, out) {
       if (err) return fin(err)
       assert.deepEqual(out.values.sort(), ['10', 20])
       fin()
@@ -94,9 +96,9 @@ describe('cache', function() {
   })
 
   it('reset', function(fin) {
-    seneca.act({role:'lrucache', cmd:'reset', }, function(err, out) {
+    seneca.act({ role: 'lrucache', cmd: 'reset' }, function(err, out) {
       if (err) return fin(err)
-      seneca.act({role:'lrucache', cmd:'keys', }, function(err, out) {
+      seneca.act({ role: 'lrucache', cmd: 'keys' }, function(err, out) {
         if (err) return fin(err)
         assert.equal(out.keys.length, 0)
         fin()

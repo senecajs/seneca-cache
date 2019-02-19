@@ -84,7 +84,7 @@ function cache(options) {
       if (typeof val !== 'number') {
         return this.fail('op_failed_nan', { op: op, key: key, val: oldVal })
       }
-      
+
       var oldVal = cache.get(key)
       if (null == oldVal) return reply()
 
@@ -105,7 +105,7 @@ function cache(options) {
 
   function cmd_peek(msg, reply) {
     var val = cache.peek(msg.key)
-    reply({value:val})
+    reply({ value: val })
   }
 
   function cmd_reset(msg, reply) {
@@ -115,17 +115,17 @@ function cache(options) {
 
   function cmd_has(msg, reply) {
     var has = cache.has(msg.key)
-    reply({has:has})
+    reply({ has: has })
   }
 
   function cmd_keys(msg, reply) {
     var keys = cache.keys()
-    reply({keys:keys})
+    reply({ keys: keys })
   }
 
   function cmd_values(msg, reply) {
     var values = cache.values()
-    reply({values:values})
+    reply({ values: values })
   }
 
   return { name: plugin }
