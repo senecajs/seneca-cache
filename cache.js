@@ -86,7 +86,7 @@ function cache(options) {
       }
 
       var oldVal = cache.get(key)
-      if (null == oldVal) return reply({value:false})
+      if (null == oldVal) return reply({ value: false })
 
       if (typeof oldVal !== 'number') {
         return this.fail('op_failed_nan', { op: op, key: key, val: oldVal })
