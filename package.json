@@ -1,18 +1,24 @@
 {
-  "name": "seneca-cache",
+  "name": "@seneca/cache",
   "version": "0.1.4",
   "description": "In-memory caching plugin for seneca",
   "main": "cache.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha test/*.test.js"
+    "test": "lab -P test -t 80 -I URL,URLSearchParams,igUint64Array,BigInt64Array,BigInt,BigUint64Array",
+    "prettier": "prettier --write --no-semi --single-quote *.js lib/*.js test/*.js",
+    "coveralls": "lab -s -P test -r lcov | coveralls",
+    "clean-npm": "rm -rf node_modules package-lock.json",
+    "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
+    "repo-publish": "npm run prettier && npm test && npm run repo-tag && npm publish --access public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/darsee/seneca-cache.git"
+    "url": "https://github.com/senecajs/seneca-cache.git"
   },
   "keywords": [
     "seneca",
     "cache",
+    "memory",
     "plugin"
   ],
   "contributors": [
@@ -21,14 +27,20 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "lru-cache": "~2.5.0"
-  },
-  "peerDependencies": {
-    "seneca": "*"
+    "lru-cache": "~5.1.1"
   },
   "devDependencies": {
-    "mocha": "~1.20.1",
-    "seneca": "~0.5.21",
-    "seneca-cache-test": "~0.2.0"
-  }
+    "@seneca/cache-test": "^1.0.2",
+    "coveralls": "^3.0.2",
+    "lab": "^18.0.2",
+    "prettier": "^1.16.4",
+    "seneca": "plugin",
+    "seneca-doc": "^0.1.2",
+    "seneca-plugin-validator": "0.0.1"
+  },
+  "files": [
+    "cache.js",
+    "README.md",
+    "LICENSE.txt"
+  ]
 }
