@@ -1,14 +1,18 @@
 language: node_js
 
 env:
-  - SENECA_VER=@1.x.x
-  - SENECA_VER=@2.x.x
+  - SENECA_VER=senecajs/seneca
+  - SENECA_VER=plugin
+
 
 node_js:
-  - "5"
-  - "4"
-  - "0.12"
-  - "0.10"
+  - '11'
+  - '10'
+  - '8'
 
 before_script:
-  - npm install seneca$SENECA_VER
+  - npm uninstall seneca
+  - npm install $SENECA_VER
+
+after_script:
+  - npm run coveralls

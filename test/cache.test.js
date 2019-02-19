@@ -6,6 +6,9 @@ var Util = require('util')
 var Lab = require('lab')
 var Code = require('code')
 
+const PluginValidator = require('seneca-plugin-validator')
+const Plugin = require('..')
+
 var Seneca = require('seneca')
 var assert = require('assert')
 var standard = require('@seneca/cache-test')
@@ -18,7 +21,15 @@ var expect = Code.expect
 var seneca = Seneca()
   .test()
   .quiet()
-  .use('..')
+  .use(Plugin)
+
+
+lab.test(
+  'validate',
+  Util.promisify(function(x, fin) {
+    PluginValidator(Plugin, module)(fin)
+  })
+)
 
 describe('cache', function() {
   it('basic', function(fin) {

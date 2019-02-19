@@ -43,17 +43,121 @@ seneca.ready(function(err) {
 });
 ```
 
-The full action argument pattern can be a bit tedious, so use a Seneca _pin_ to make things more convenient:
 
-```js
-var cache = seneca.pin({role:'cache', cmd:'*'});
+<!--START:action-list-->
 
-cache.set({key: 'k1', val: 'v1'}, function(err) {
-  cache.get({key:'k1'}, function(err, out) {
-    console.log('value = ' + out);
-  });
-});
-```
+
+## Action Patterns
+
+* [cmd:get,role:cache](#-cmdgetrolecache-)
+* [cmd:set,role:cache](#-cmdsetrolecache-)
+* [cmd:add,role:cache](#-cmdaddrolecache-)
+* [cmd:delete,role:cache](#-cmddeleterolecache-)
+* [cmd:incr,role:cache](#-cmdincrrolecache-)
+* [cmd:decr,role:cache](#-cmddecrrolecache-)
+* [cmd:peek,role:lrucache](#-cmdpeekrolelrucache-)
+* [cmd:reset,role:lrucache](#-cmdresetrolelrucache-)
+* [cmd:has,role:lrucache](#-cmdhasrolelrucache-)
+* [cmd:keys,role:lrucache](#-cmdkeysrolelrucache-)
+* [cmd:values,role:lrucache](#-cmdvaluesrolelrucache-)
+* [get:native,role:cache](#-getnativerolecache-)
+
+
+<!--END:action-list-->
+
+<!--START:action-desc-->
+
+
+## Action Descriptions
+
+### &laquo; `cmd:get,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:set,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:add,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:delete,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:incr,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:decr,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:peek,role:lrucache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:reset,role:lrucache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:has,role:lrucache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:keys,role:lrucache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:values,role:lrucache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `get:native,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+
+
+<!--END:action-desc-->
+
 
 ## Common Cache API
 
