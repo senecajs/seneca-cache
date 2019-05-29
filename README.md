@@ -53,6 +53,7 @@ seneca.ready(function(err) {
 * [cmd:delete,role:cache](#-cmddeleterolecache-)
 * [cmd:incr,role:cache](#-cmdincrrolecache-)
 * [cmd:decr,role:cache](#-cmddecrrolecache-)
+* [cmd:clear,role:cache](#-cmdclearrolecache-)
 * [cmd:peek,role:lrucache](#-cmdpeekrolelrucache-)
 * [cmd:reset,role:lrucache](#-cmdresetrolelrucache-)
 * [cmd:has,role:lrucache](#-cmdhasrolelrucache-)
@@ -104,6 +105,13 @@ No description provided.
 
 ----------
 ### &laquo; `cmd:decr,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:clear,role:cache` &raquo;
 
 No description provided.
 
