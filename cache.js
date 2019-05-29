@@ -36,6 +36,7 @@ function cache(options) {
   seneca.add({ role: plugin, cmd: 'delete' }, cmd_delete)
   seneca.add({ role: plugin, cmd: 'incr' }, incrdecr('incr'))
   seneca.add({ role: plugin, cmd: 'decr' }, incrdecr('decr'))
+  seneca.add({ role: plugin, cmd: 'clear' }, cmd_clear)
 
   seneca.add({ role: plugin, get: 'native' }, get_native)
 
@@ -97,6 +98,11 @@ function cache(options) {
       cache.set(key, newVal)
       reply({ value: newVal })
     }
+  }
+
+  function cmd_clear(msg, reply) {
+    cache.reset()
+    reply()
   }
 
   function get_native(msg, reply) {

@@ -35,9 +35,6 @@ describe('cache', function() {
     standard.basictest(seneca, fin)
   })
 
-  //var cache = seneca.pin({role: 'cache', cmd: '*'});
-  //var lrucache = seneca.pin({role: 'lrucache', cmd: '*'});
-
   it('set', function(fin) {
     seneca.act({ role: 'cache', cmd: 'set', key: 'x', val: '10' }, function(
       err,
