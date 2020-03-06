@@ -5,6 +5,7 @@
 # seneca-cache
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
+[![Coverage Status][coveralls-badge]][coveralls-url]
 [![Dependency Status][david-badge]][david-url]
 [![Gitter][gitter-badge]][gitter-url]
 
@@ -213,10 +214,12 @@ Licensed under [MIT][].
 [Seneca.js]: https://www.npmjs.com/package/seneca
 [travis-badge]: https://travis-ci.org/senecajs/seneca-cache.svg
 [travis-url]: https://travis-ci.org/senecajs/seneca-cache
-[npm-badge]: https://img.shields.io/npm/v/seneca-cache.svg
-[npm-url]: https://npmjs.com/package/seneca-cache
+[npm-badge]: https://img.shields.io/npm/v/@seneca/cache.svg
+[npm-url]: https://npmjs.com/package/@seneca/cache
 [david-badge]: https://david-dm.org/senecajs/seneca-cache.svg
 [david-url]: https://david-dm.org/senecajs/seneca-cache
 [gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
-[gitter-url]: https://gitter.im/rjrodger/seneca
+[gitter-url]: https://gitter.im/senecajs/seneca
+[coveralls-badge]: https://coveralls.io/repos/github/senecajs/seneca-cache/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/senecajs/seneca-cache?branch=master
 [Senecajs org]: https://github.com/senecajs/
