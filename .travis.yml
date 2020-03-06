@@ -1,12 +1,13 @@
 language: node_js
+sudo: false
 
 env:
   - SENECA_VER=senecajs/seneca
   - SENECA_VER=plugin
 
-
 node_js:
-  - '11'
+  - '13'
+  - '12'
   - '10'
   - '8'
 

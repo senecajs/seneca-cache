@@ -82,15 +82,15 @@ function cache(options) {
       var key = msg.key
       var val = msg.val
 
-      if (typeof val !== 'number') {
-        return this.fail('op_failed_nan', { op: kind, key: key, val: oldVal })
-      }
-
       var oldVal = cache.get(key)
       if (null == oldVal) return reply({ value: false })
-
+      
       if (typeof oldVal !== 'number') {
-        return this.fail('op_failed_nan', { op: op, key: key, val: oldVal })
+        return this.fail('op_failed_nan', { op: kind, key: key, old_val: oldVal })
+      }
+
+      if (typeof val !== 'number') {
+        return this.fail('op_failed_nan', { op: kind, key: key, delta_val: val })
       }
 
       var newVal = kind === 'decr' ? oldVal - val : oldVal + val

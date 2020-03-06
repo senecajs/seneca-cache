@@ -1,33 +1,32 @@
-/* Copyright (c) 2012-2019 Richard Rodger, Seamus D'Arcy, and other contributors, MIT License */
+/* Copyright (c) 2012-2020 Richard Rodger, Seamus D'Arcy, and other contributors, MIT License */
 'use strict'
 
 var Util = require('util')
 
-var Lab = require('lab')
-var Code = require('code')
+const Lab = require('@hapi/lab')
+const Code = require('@hapi/code')
+const lab = (exports.lab = Lab.script())
+const expect = Code.expect
 
 const PluginValidator = require('seneca-plugin-validator')
+const Seneca = require('seneca')
 const Plugin = require('..')
 
-var Seneca = require('seneca')
-var assert = require('assert')
+const Assert = require('assert')
 var standard = require('@seneca/cache-test')
 
-var lab = (exports.lab = Lab.script())
 var describe = lab.describe
 var it = make_it(lab)
-var expect = Code.expect
 
 var seneca = Seneca()
-  .test()
-  .quiet()
-  .use(Plugin)
+    .use('promisify')
+    .test()
+    .quiet()
+    .use(Plugin)
 
 lab.test(
   'validate',
-  Util.promisify(function(x, fin) {
-    PluginValidator(Plugin, module)(fin)
-  })
+  PluginValidator(Plugin, module)
 )
 
 describe('cache', function() {
@@ -35,6 +34,37 @@ describe('cache', function() {
     standard.basictest(seneca, fin)
   })
 
+  lab.it('errors', async () => {
+    await seneca.post('role:cache,cmd:set,key:e0,val:0')
+    
+    try {
+      await seneca.post('role:cache,cmd:incr,key:e0,incr:a')
+      Code.fail()
+    }
+    catch(e) {
+      expect(e.code).equals('op_failed_nan')
+    }
+
+    try {
+      await seneca.post('role:cache,cmd:decr,key:e0,incr:a')
+      Code.fail()
+    }
+    catch(e) {
+      expect(e.code).equals('op_failed_nan')
+    }
+
+
+    await seneca.post('role:cache,cmd:set,key:e1,val:a')
+
+    try {
+      await seneca.post('role:cache,cmd:incr,key:e1',{val:2})
+      Code.fail()
+    }
+    catch(e) {
+      expect(e.code).equals('op_failed_nan')
+    }
+  })
+  
   it('set', function(fin) {
     seneca.act({ role: 'cache', cmd: 'set', key: 'x', val: '10' }, function(
       err,
@@ -54,14 +84,14 @@ describe('cache', function() {
   it('peek', function(fin) {
     seneca.act({ role: 'lrucache', cmd: 'peek', key: 'x' }, function(err, out) {
       if (err) return fin(err)
-      assert.equal(out.value, '10')
+      Assert.equal(out.value, '10')
 
       seneca.act({ role: 'lrucache', cmd: 'peek', key: 'y' }, function(
         err,
         out
       ) {
         if (err) return fin(err)
-        assert.equal(out.value, 20)
+        Assert.equal(out.value, 20)
 
         fin()
       })
@@ -71,25 +101,19 @@ describe('cache', function() {
   it('has', function(fin) {
     seneca.act({ role: 'lrucache', cmd: 'has', key: 'x' }, function(err, out) {
       if (err) return fin(err)
-      assert(out)
+      Assert(out)
       fin()
     })
   })
 
-  it('keys', function(fin) {
-    seneca.act({ role: 'lrucache', cmd: 'keys' }, function(err, out) {
-      if (err) return fin(err)
-      assert.deepEqual(out.keys.sort(), ['x', 'y'])
-      fin()
-    })
+  lab.it('keys', async () => {
+    var out = await seneca.post({ role: 'lrucache', cmd: 'keys' })
+    expect(out.keys.sort()).equal([ 'e0', 'e1', 'x', 'y' ])
   })
 
-  it('values', function(fin) {
-    seneca.act({ role: 'lrucache', cmd: 'values' }, function(err, out) {
-      if (err) return fin(err)
-      assert.deepEqual(out.values.sort(), ['10', 20])
-      fin()
-    })
+  lab.it('values', async () => {
+    var out = await seneca.post({ role: 'lrucache', cmd: 'values' })
+    expect(out.values.sort()).equal([ 0, '10', 20, 'a' ])
   })
 
   it('reset', function(fin) {
@@ -97,7 +121,7 @@ describe('cache', function() {
       if (err) return fin(err)
       seneca.act({ role: 'lrucache', cmd: 'keys' }, function(err, out) {
         if (err) return fin(err)
-        assert.equal(out.keys.length, 0)
+        Assert.equal(out.keys.length, 0)
         fin()
       })
     })
