@@ -55,6 +55,8 @@ seneca.ready(function(err) {
 * [cmd:incr,role:cache](#-cmdincrrolecache-)
 * [cmd:decr,role:cache](#-cmddecrrolecache-)
 * [cmd:clear,role:cache](#-cmdclearrolecache-)
+* [cmd:micro,get:stats,role:cache](#-cmdmicrogetstatsrolecache-)
+* [cmd:micro,role:cache](#-cmdmicrorolecache-)
 * [cmd:peek,role:lrucache](#-cmdpeekrolelrucache-)
 * [cmd:reset,role:lrucache](#-cmdresetrolelrucache-)
 * [cmd:has,role:lrucache](#-cmdhasrolelrucache-)
@@ -113,6 +115,20 @@ No description provided.
 
 ----------
 ### &laquo; `cmd:clear,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:micro,get:stats,role:cache` &raquo;
+
+No description provided.
+
+
+
+----------
+### &laquo; `cmd:micro,role:cache` &raquo;
 
 No description provided.
 
