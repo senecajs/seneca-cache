@@ -1,6 +1,6 @@
 {
   "name": "@seneca/cache",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "In-memory caching plugin for seneca",
   "main": "cache.js",
   "scripts": {
@@ -46,6 +46,7 @@
   },
   "files": [
     "cache.js",
+    "lib",
     "README.md",
     "LICENSE.txt"
   ]
