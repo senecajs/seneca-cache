@@ -36,12 +36,13 @@
     "@hapi/code": "^8.0.1",
     "@hapi/lab": "^22.0.3",
     "@seneca/cache-test": "^2.0.0",
+    "@sinonjs/fake-timers": "^6.0.0",
     "coveralls": "^3.0.9",
     "prettier": "^1.19.1",
-    "promisify": "0.0.3",
     "seneca": "^3.20.1",
     "seneca-doc": "^2.1.2",
-    "seneca-plugin-validator": "^0.6.0"
+    "seneca-plugin-validator": "^0.6.0",
+    "seneca-promisify": "^1.2.0"
   },
   "files": [
     "cache.js",
