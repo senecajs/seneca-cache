@@ -18,16 +18,12 @@ var standard = require('@seneca/cache-test')
 var describe = lab.describe
 var it = make_it(lab)
 
-var seneca = Seneca()
-  .use('promisify')
-  .test()
-  .quiet()
-  .use(Plugin)
+var seneca = Seneca().use('promisify').test().quiet().use(Plugin)
 
 lab.test('validate', PluginValidator(Plugin, module))
 
-describe('cache', function() {
-  it('basic', function(fin) {
+describe('cache', function () {
+  it('basic', function (fin) {
     standard.basictest(seneca, fin)
   })
 
@@ -58,14 +54,14 @@ describe('cache', function() {
     }
   })
 
-  it('set', function(fin) {
-    seneca.act({ role: 'cache', cmd: 'set', key: 'x', val: '10' }, function(
+  it('set', function (fin) {
+    seneca.act({ role: 'cache', cmd: 'set', key: 'x', val: '10' }, function (
       err,
       out
     ) {
       if (err) return fin(err)
 
-      seneca.act({ role: 'cache', cmd: 'set', key: 'y', val: 20 }, function(
+      seneca.act({ role: 'cache', cmd: 'set', key: 'y', val: 20 }, function (
         err,
         out
       ) {
@@ -74,12 +70,15 @@ describe('cache', function() {
     })
   })
 
-  it('peek', function(fin) {
-    seneca.act({ role: 'lrucache', cmd: 'peek', key: 'x' }, function(err, out) {
+  it('peek', function (fin) {
+    seneca.act({ role: 'lrucache', cmd: 'peek', key: 'x' }, function (
+      err,
+      out
+    ) {
       if (err) return fin(err)
       Assert.equal(out.value, '10')
 
-      seneca.act({ role: 'lrucache', cmd: 'peek', key: 'y' }, function(
+      seneca.act({ role: 'lrucache', cmd: 'peek', key: 'y' }, function (
         err,
         out
       ) {
@@ -91,8 +90,8 @@ describe('cache', function() {
     })
   })
 
-  it('has', function(fin) {
-    seneca.act({ role: 'lrucache', cmd: 'has', key: 'x' }, function(err, out) {
+  it('has', function (fin) {
+    seneca.act({ role: 'lrucache', cmd: 'has', key: 'x' }, function (err, out) {
       if (err) return fin(err)
       Assert(out)
       fin()
@@ -109,10 +108,10 @@ describe('cache', function() {
     expect(out.values.sort()).equal([0, '10', 20, 'a'])
   })
 
-  it('reset', function(fin) {
-    seneca.act({ role: 'lrucache', cmd: 'reset' }, function(err, out) {
+  it('reset', function (fin) {
+    seneca.act({ role: 'lrucache', cmd: 'reset' }, function (err, out) {
       if (err) return fin(err)
-      seneca.act({ role: 'lrucache', cmd: 'keys' }, function(err, out) {
+      seneca.act({ role: 'lrucache', cmd: 'keys' }, function (err, out) {
         if (err) return fin(err)
         Assert.equal(out.keys.length, 0)
         fin()
@@ -131,7 +130,7 @@ function make_it(lab) {
     lab.it(
       name,
       opts,
-      Util.promisify(function(x, fin) {
+      Util.promisify(function (x, fin) {
         func(fin)
       })
     )

@@ -551,7 +551,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">11</div>
-          <div class="duration">456</div>
+          <div class="duration">420</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -585,7 +585,7 @@
               <td class="test-title">cache basic
                   
               </td>
-              <td class="test-duration">136</td>
+              <td class="test-duration">135</td>
           </tr>
           <tr class="show cache success">
               <td class="test-id">3</td>
@@ -599,35 +599,35 @@
               <td class="test-title">cache set
                   
               </td>
-              <td class="test-duration">0</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show cache success">
               <td class="test-id">5</td>
               <td class="test-title">cache peek
                   
               </td>
-              <td class="test-duration">0</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show cache success">
               <td class="test-id">6</td>
               <td class="test-title">cache has
                   
               </td>
-              <td class="test-duration">1</td>
+              <td class="test-duration">0</td>
           </tr>
           <tr class="show cache success">
               <td class="test-id">7</td>
               <td class="test-title">cache keys
                   
               </td>
-              <td class="test-duration">2</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show cache success">
               <td class="test-id">8</td>
               <td class="test-title">cache values
                   
               </td>
-              <td class="test-duration">2</td>
+              <td class="test-duration">1</td>
           </tr>
           <tr class="show cache success">
               <td class="test-id">9</td>
@@ -641,14 +641,14 @@
               <td class="test-title">micro happy
                   
               </td>
-              <td class="test-duration">14</td>
+              <td class="test-duration">8</td>
           </tr>
           <tr class="show micro success">
               <td class="test-id">11</td>
               <td class="test-title">micro action
                   
               </td>
-              <td class="test-duration">288</td>
+              <td class="test-duration">260</td>
           </tr>
           </tbody>
       </table>
@@ -761,13 +761,13 @@
                           <td class="line" data-tooltip>13</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    expiry: 11111 // 10-ish seconds</td>
+                          <td class="source">    expiry: 11111, // 10-ish seconds</td>
                           
                         </tr>            <tr id="cache.js__14" class="hit">
                           <td class="line" data-tooltip>14</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source">  },</td>
                           
                         </tr>            <tr id="cache.js__15" class="hit">
                           <td class="line" data-tooltip>15</td>
@@ -803,7 +803,7 @@
                           <td class="line" data-tooltip>20</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    &#x27;Operation &lt;%&#x3D;op%&gt; failed for key &lt;%&#x3D;key%&gt; as value is not a number: &lt;%&#x3D;oldVal%&gt;.&#x27;</td>
+                          <td class="source">    &#x27;Operation &lt;%&#x3D;op%&gt; failed for key &lt;%&#x3D;key%&gt; as value is not a number: &lt;%&#x3D;oldVal%&gt;.&#x27;,</td>
                           
                         </tr>            <tr id="cache.js__21" class="hit">
                           <td class="line" data-tooltip>21</td>
@@ -875,7 +875,7 @@
                           <td class="line" data-tooltip>32</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        length: function(n) {</td>
+                          <td class="source">        length: function (n) {</td>
                           
                         </tr>            <tr id="cache.js__33" class="hit">
                           <td class="line" data-tooltip>33</td>
@@ -887,13 +887,13 @@
                           <td class="line" data-tooltip>34</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source">        },</td>
                           
                         </tr>            <tr id="cache.js__35" class="hit">
                           <td class="line" data-tooltip>35</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      },</td>
                           
                         </tr>            <tr id="cache.js__36" class="hit">
                           <td class="line" data-tooltip>36</td>
@@ -1253,7 +1253,7 @@
                           <td class="line" data-tooltip>95</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>4</td>
-                          <td class="source">    return function(msg, reply) {</td>
+                          <td class="source">    return function (msg, reply) {</td>
                           
                         </tr>            <tr id="cache.js__96" class="hit">
                           <td class="line" data-tooltip>96</td>
@@ -1319,7 +1319,7 @@
                           <td class="line" data-tooltip>106</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          old_val: oldVal</td>
+                          <td class="source">          old_val: oldVal,</td>
                           
                         </tr>            <tr id="cache.js__107" class="hit">
                           <td class="line" data-tooltip>107</td>
@@ -1367,7 +1367,7 @@
                           <td class="line" data-tooltip>114</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          delta_val: val</td>
+                          <td class="source">          delta_val: val,</td>
                           
                         </tr>            <tr id="cache.js__115" class="hit">
                           <td class="line" data-tooltip>115</td>
@@ -1685,7 +1685,7 @@
                           <td class="line" data-tooltip>167</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      ? pins.split(&#x27;;&#x27;).map(pin &#x3D;&gt; Jsonic(pin))</td>
+                          <td class="source">      ? pins.split(&#x27;;&#x27;).map((pin) &#x3D;&gt; Jsonic(pin))</td>
                           
                         </tr>            <tr id="cache.js__168" class="hit">
                           <td class="line" data-tooltip>168</td>
@@ -1703,7 +1703,7 @@
                           <td class="line" data-tooltip>170</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>4</td>
-                          <td class="source">    pins.forEach(pin &#x3D;&gt; {</td>
+                          <td class="source">    pins.forEach((pin) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cache.js__171" class="hit">
                           <td class="line" data-tooltip>171</td>
@@ -1733,7 +1733,7 @@
                           <td class="line" data-tooltip>175</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          callback &#x3D;&gt; {</td>
+                          <td class="source">          (callback) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cache.js__176" class="hit">
                           <td class="line" data-tooltip>176</td>
@@ -1799,7 +1799,7 @@
                           <td class="line" data-tooltip>186</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      pins: pins</td>
+                          <td class="source">      pins: pins,</td>
                           
                         </tr>            <tr id="cache.js__187" class="hit">
                           <td class="line" data-tooltip>187</td>
@@ -1835,7 +1835,7 @@
                           <td class="line" data-tooltip>192</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>1</td>
-                          <td class="source">    micro.forEach(m &#x3D;&gt; {</td>
+                          <td class="source">    micro.forEach((m) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="cache.js__193" class="hit">
                           <td class="line" data-tooltip>193</td>
@@ -2007,7 +2007,7 @@
                           <td class="line" data-tooltip>15</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    live: 0</td>
+                          <td class="source">    live: 0,</td>
                           
                         </tr>            <tr id="lib/micro.js__16" class="hit">
                           <td class="line" data-tooltip>16</td>
@@ -2025,7 +2025,7 @@
                           <td class="line" data-tooltip>18</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>7</td>
-                          <td class="source">  self.stats &#x3D; function() {</td>
+                          <td class="source">  self.stats &#x3D; function () {</td>
                           
                         </tr>            <tr id="lib/micro.js__19" class="hit">
                           <td class="line" data-tooltip>19</td>
@@ -2049,7 +2049,7 @@
                           <td class="line" data-tooltip>22</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>7</td>
-                          <td class="source">  self.submit &#x3D; function(action, callback) {</td>
+                          <td class="source">  self.submit &#x3D; function (action, callback) {</td>
                           
                         </tr>            <tr id="lib/micro.js__23" class="hit">
                           <td class="line" data-tooltip>23</td>
@@ -2187,7 +2187,7 @@
                           <td class="line" data-tooltip>45</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>6</td>
-                          <td class="source">      action(function(...out) {</td>
+                          <td class="source">      action(function (...out) {</td>
                           
                         </tr>            <tr id="lib/micro.js__46" class="hit">
                           <td class="line" data-tooltip>46</td>
@@ -2397,7 +2397,7 @@
                           <td class="line" data-tooltip>80</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>13</td>
-                          <td class="source">    res.forEach(o &#x3D;&gt; o &amp;&amp; (o.mc$ &#x3D; mc))</td>
+                          <td class="source">    res.forEach((o) &#x3D;&gt; o &amp;&amp; (o.mc$ &#x3D; mc))</td>
                           
                         </tr>            <tr id="lib/micro.js__81" class="hit">
                           <td class="line" data-tooltip>81</td>

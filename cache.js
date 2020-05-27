@@ -10,14 +10,14 @@ module.exports = cache
 
 module.exports.defaults = {
   micro: {
-    expiry: 11111 // 10-ish seconds
-  }
+    expiry: 11111, // 10-ish seconds
+  },
 }
 
 module.exports.errors = {
   key_exists: 'Key <%=key%> exists.',
   op_failed_nan:
-    'Operation <%=op%> failed for key <%=key%> as value is not a number: <%=oldVal%>.'
+    'Operation <%=op%> failed for key <%=key%> as value is not a number: <%=oldVal%>.',
 }
 
 function cache(options) {
@@ -29,10 +29,10 @@ function cache(options) {
       lrucache: {
         max: 9999,
         maxAge: 1000 * 60 * 60,
-        length: function(n) {
+        length: function (n) {
           return n.length
-        }
-      }
+        },
+      },
     },
     options
   )
@@ -92,7 +92,7 @@ function cache(options) {
   }
 
   function incrdecr(kind) {
-    return function(msg, reply) {
+    return function (msg, reply) {
       var key = msg.key
       var val = msg.val
 
@@ -103,7 +103,7 @@ function cache(options) {
         return this.fail('op_failed_nan', {
           op: kind,
           key: key,
-          old_val: oldVal
+          old_val: oldVal,
         })
       }
 
@@ -111,7 +111,7 @@ function cache(options) {
         return this.fail('op_failed_nan', {
           op: kind,
           key: key,
-          delta_val: val
+          delta_val: val,
         })
       }
 
@@ -164,15 +164,15 @@ function cache(options) {
     pins = Array.isArray(pins)
       ? pins
       : 'string' === typeof pins
-      ? pins.split(';').map(pin => Jsonic(pin))
+      ? pins.split(';').map((pin) => Jsonic(pin))
       : [Object.assign({}, pins)]
 
-    pins.forEach(pin => {
+    pins.forEach((pin) => {
       var m = Micro({ expiry: expiry })
       micro.push({ m: m, pin: seneca.util.pattern(pin) })
       seneca.root.wrap(pin, function micro_cache(msg, reply) {
         m.submit(
-          callback => {
+          (callback) => {
             this.prior(msg, callback)
           },
           (...res) => {
@@ -183,13 +183,13 @@ function cache(options) {
     })
 
     reply({
-      pins: pins
+      pins: pins,
     })
   }
 
   function get_micro_stats(msg, reply) {
     var stats = []
-    micro.forEach(m => {
+    micro.forEach((m) => {
       var s = Object.assign({ pin: m.pin }, m.m.stats())
       s.total = s.miss + s.hit
       s.hr = s.hit / s.total

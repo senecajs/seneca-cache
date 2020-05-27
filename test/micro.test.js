@@ -15,7 +15,7 @@ const it = lab.it
 const Micro = require('../lib/micro')
 const Seneca = require('seneca')
 
-describe('micro', function() {
+describe('micro', function () {
   it('happy', async () => {
     const clock = FakeTimers.install()
 
@@ -37,10 +37,10 @@ describe('micro', function() {
           expect(m0).contains({
             _expiry: 20,
             _res: [0, 1, 2, 3],
-            _running: false
+            _running: false,
           })
           // cb1,cb2 waiting
-          expect(m0._que.map(f => f.name).join(',')).equals('cb1,cb2')
+          expect(m0._que.map((f) => f.name).join(',')).equals('cb1,cb2')
         }
       )
 
@@ -48,17 +48,17 @@ describe('micro', function() {
       expect(m0).contains({
         _expiry: 20,
         _res: null,
-        _running: true // a0 running
+        _running: true, // a0 running
       })
 
       // cb0 still waiting
-      expect(m0._que.map(f => f.name).join(',')).equals('cb0')
+      expect(m0._que.map((f) => f.name).join(',')).equals('cb0')
 
       setTimeout(() => {
         expect(m0).contains({
           _expiry: 20,
           _res: null,
-          _running: true // a0 still running
+          _running: true, // a0 still running
         })
       }, 10)
 
@@ -76,10 +76,10 @@ describe('micro', function() {
           expect(m0).contains({
             _expiry: 20,
             _res: [0, 1, 2, 3],
-            _running: false // false as can only be called after running complete
+            _running: false, // false as can only be called after running complete
           })
           // cb2 next
-          expect(m0._que.map(f => f.name).join(',')).equals('cb2')
+          expect(m0._que.map((f) => f.name).join(',')).equals('cb2')
         }
       )
 
@@ -87,11 +87,11 @@ describe('micro', function() {
       expect(m0).contains({
         _expiry: 20,
         _res: null,
-        _running: true // a0 running
+        _running: true, // a0 running
       })
 
       // cb0 still waiting, cb1 now also waiting
-      expect(m0._que.map(f => f.name).join(',')).equals('cb0,cb1')
+      expect(m0._que.map((f) => f.name).join(',')).equals('cb0,cb1')
 
       // within wait period of first call
       setTimeout(() => {
@@ -108,9 +108,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [0, 1, 2, 3],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('')
+            expect(m0._que.map((f) => f.name).join(',')).equals('')
           }
         )
       }, 10)
@@ -130,9 +130,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [0, 1, 2, 3],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('')
+            expect(m0._que.map((f) => f.name).join(',')).equals('')
           }
         )
       }, 30)
@@ -152,9 +152,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [4, 5, 6, 7],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('cb5')
+            expect(m0._que.map((f) => f.name).join(',')).equals('cb5')
           }
         )
 
@@ -170,10 +170,10 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [4, 5, 6, 7],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
             // cb2 next
-            expect(m0._que.map(f => f.name).join(',')).equals('')
+            expect(m0._que.map((f) => f.name).join(',')).equals('')
           }
         )
       }, 50)
@@ -192,9 +192,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('cb7')
+            expect(m0._que.map((f) => f.name).join(',')).equals('cb7')
           }
         )
 
@@ -210,9 +210,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('')
+            expect(m0._que.map((f) => f.name).join(',')).equals('')
           }
         )
       }, 90)
@@ -231,9 +231,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [null, null],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('cb9')
+            expect(m0._que.map((f) => f.name).join(',')).equals('cb9')
           }
         )
 
@@ -249,9 +249,9 @@ describe('micro', function() {
             expect(m0).contains({
               _expiry: 20,
               _res: [null, null],
-              _running: false // false as can only be called after running complete
+              _running: false, // false as can only be called after running complete
             })
-            expect(m0._que.map(f => f.name).join(',')).equals('')
+            expect(m0._que.map((f) => f.name).join(',')).equals('')
           }
         )
       }, 130)
@@ -285,7 +285,7 @@ describe('micro', function() {
     var m0 = await si.post('role:cache,cmd:micro', {
       pin: 'a:1',
       pins: 'ignored',
-      expiry: 10
+      expiry: 10,
     })
     expect(m0.pins).equal([{ a: 1 }])
     expect(si.find('a:1').priorpath).equals('a1_13;')
@@ -307,21 +307,21 @@ describe('micro', function() {
     }, 30)
 
     var m1 = await si.post('role:cache,cmd:micro', {
-      pins: 'b:1;c:2'
+      pins: 'b:1;c:2',
     })
     expect(m1.pins).equal([{ b: 1 }, { c: 2 }])
 
     var m2 = await si.post('role:cache,cmd:micro', {
-      pin: [{ d: 1 }, { e: 2 }]
+      pin: [{ d: 1 }, { e: 2 }],
     })
     expect(m2.pins).equal([{ d: 1 }, { e: 2 }])
 
     var m3 = await si.post('role:cache,cmd:micro', {
-      pins: { f: 2 }
+      pins: { f: 2 },
     })
     expect(m3.pins).equal([{ f: 2 }])
 
-    return new Promise(r =>
+    return new Promise((r) =>
       setTimeout(async () => {
         var stats = await si.post('role:cache,cmd:micro,get:stats')
 
@@ -333,7 +333,7 @@ describe('micro', function() {
           live: 1,
           total: 3,
           hr: 0.3333333333333333,
-          lr: 0.3333333333333333
+          lr: 0.3333333333333333,
         })
 
         r()
@@ -343,8 +343,5 @@ describe('micro', function() {
 })
 
 function make_seneca() {
-  return Seneca({ legacy: false })
-    .test()
-    .use('promisify')
-    .use('..')
+  return Seneca({ legacy: false }).test().use('promisify').use('..')
 }
