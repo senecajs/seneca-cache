@@ -223,7 +223,7 @@ mocha test/cache.test.js
 
 ## License
 
-Copyright (c) 2014-2016, Seamus D'Arcy and other contributors.
+Copyright (c) 2014-2020, Richard Rodger, Seamus D'Arcy and other contributors.
 Licensed under [MIT][].
 
 [MIT]: ./LICENSE

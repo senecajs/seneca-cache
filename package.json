@@ -34,15 +34,15 @@
   },
   "devDependencies": {
     "@hapi/code": "^8.0.1",
-    "@hapi/lab": "^22.0.3",
+    "@hapi/lab": "^22.0.4",
     "@seneca/cache-test": "^2.0.0",
-    "@sinonjs/fake-timers": "^6.0.0",
-    "coveralls": "^3.0.9",
-    "prettier": "^1.19.1",
-    "seneca": "^3.20.1",
-    "seneca-doc": "^2.1.2",
-    "seneca-plugin-validator": "^0.6.0",
-    "seneca-promisify": "^1.2.0"
+    "@sinonjs/fake-timers": "^6.0.1",
+    "coveralls": "^3.1.0",
+    "prettier": "^2.0.5",
+    "seneca": "^3.21.2",
+    "seneca-doc": "^2.1.3",
+    "seneca-plugin-validator": "^0.6.1",
+    "seneca-promisify": "^1.4.0"
   },
   "files": [
     "cache.js",
