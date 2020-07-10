@@ -198,4 +198,6 @@ function cache(options) {
     })
     reply(stats)
   }
+
+  return { name: plugin }
 }
