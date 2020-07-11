@@ -6,7 +6,7 @@
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![Coverage Status][coveralls-badge]][coveralls-url]
-
+[![DeepScan grade](https://deepscan.io/api/teams/5016/projects/12815/branches/203961/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5016&pid=12815&bid=203961)
 [![Dependency Status][david-badge]][david-url]
 [![Gitter][gitter-badge]][gitter-url]
 
