@@ -6,6 +6,7 @@
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![Coverage Status][coveralls-badge]][coveralls-url]
+
 [![Dependency Status][david-badge]][david-url]
 [![Gitter][gitter-badge]][gitter-url]
 
@@ -43,26 +44,51 @@ seneca.ready(function(err) {
 ```
 
 
+<!--START:options-->
+
+
+## Options
+
+* `micro.expiry` : number <i><small>11111</small></i>
+
+
+Set plugin options when loading with:
+```js
+
+
+seneca.use('cache', { name: value, ... })
+
+
+```
+
+
+<small>Note: <code>foo.bar</code> in the list above means 
+<code>{ foo: { bar: ... } }</code></small> 
+
+
+
+<!--END:options-->
+
 <!--START:action-list-->
 
 
 ## Action Patterns
 
-* [cmd:get,role:cache](#-cmdgetrolecache-)
-* [cmd:set,role:cache](#-cmdsetrolecache-)
-* [cmd:add,role:cache](#-cmdaddrolecache-)
-* [cmd:delete,role:cache](#-cmddeleterolecache-)
-* [cmd:incr,role:cache](#-cmdincrrolecache-)
-* [cmd:decr,role:cache](#-cmddecrrolecache-)
-* [cmd:clear,role:cache](#-cmdclearrolecache-)
-* [cmd:micro,get:stats,role:cache](#-cmdmicrogetstatsrolecache-)
-* [cmd:micro,role:cache](#-cmdmicrorolecache-)
-* [cmd:peek,role:lrucache](#-cmdpeekrolelrucache-)
-* [cmd:reset,role:lrucache](#-cmdresetrolelrucache-)
-* [cmd:has,role:lrucache](#-cmdhasrolelrucache-)
-* [cmd:keys,role:lrucache](#-cmdkeysrolelrucache-)
-* [cmd:values,role:lrucache](#-cmdvaluesrolelrucache-)
-* [get:native,role:cache](#-getnativerolecache-)
+* [role:cache,cmd:add](#-rolecachecmdadd-)
+* [role:cache,cmd:clear](#-rolecachecmdclear-)
+* [role:cache,cmd:decr](#-rolecachecmddecr-)
+* [role:cache,cmd:delete](#-rolecachecmddelete-)
+* [role:cache,cmd:get](#-rolecachecmdget-)
+* [role:cache,cmd:incr](#-rolecachecmdincr-)
+* [role:cache,cmd:micro](#-rolecachecmdmicro-)
+* [role:cache,cmd:micro,get:stats](#-rolecachecmdmicrogetstats-)
+* [role:cache,cmd:set](#-rolecachecmdset-)
+* [role:cache,get:native](#-rolecachegetnative-)
+* [role:lrucache,cmd:has](#-rolelrucachecmdhas-)
+* [role:lrucache,cmd:keys](#-rolelrucachecmdkeys-)
+* [role:lrucache,cmd:peek](#-rolelrucachecmdpeek-)
+* [role:lrucache,cmd:reset](#-rolelrucachecmdreset-)
+* [role:lrucache,cmd:values](#-rolelrucachecmdvalues-)
 
 
 <!--END:action-list-->
@@ -72,105 +98,105 @@ seneca.ready(function(err) {
 
 ## Action Descriptions
 
-### &laquo; `cmd:get,role:cache` &raquo;
+### &laquo; `role:cache,cmd:add` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:set,role:cache` &raquo;
+### &laquo; `role:cache,cmd:clear` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:add,role:cache` &raquo;
+### &laquo; `role:cache,cmd:decr` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:delete,role:cache` &raquo;
+### &laquo; `role:cache,cmd:delete` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:incr,role:cache` &raquo;
+### &laquo; `role:cache,cmd:get` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:decr,role:cache` &raquo;
+### &laquo; `role:cache,cmd:incr` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:clear,role:cache` &raquo;
+### &laquo; `role:cache,cmd:micro` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:micro,get:stats,role:cache` &raquo;
+### &laquo; `role:cache,cmd:micro,get:stats` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:micro,role:cache` &raquo;
+### &laquo; `role:cache,cmd:set` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:peek,role:lrucache` &raquo;
+### &laquo; `role:cache,get:native` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:reset,role:lrucache` &raquo;
+### &laquo; `role:lrucache,cmd:has` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:has,role:lrucache` &raquo;
+### &laquo; `role:lrucache,cmd:keys` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:keys,role:lrucache` &raquo;
+### &laquo; `role:lrucache,cmd:peek` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `cmd:values,role:lrucache` &raquo;
+### &laquo; `role:lrucache,cmd:reset` &raquo;
 
 No description provided.
 
 
 
 ----------
-### &laquo; `get:native,role:cache` &raquo;
+### &laquo; `role:lrucache,cmd:values` &raquo;
 
 No description provided.
 
