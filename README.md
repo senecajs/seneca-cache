@@ -15,21 +15,23 @@
 ## Install
 
 ```
-npm install seneca
-npm install seneca-cache
+npm install seneca@^4 @seneca/cache
 ```
+
+Version 5 of this plugin needs Seneca 4 and Node.js 24 or later. Seneca 3
+users stay on `@seneca/cache@4`.
 ### Quick example
 
 This code snippet sets a value and then retrieves it.
 
 ```
 var seneca = require('seneca')();
-seneca.use('cache');
+seneca.use('@seneca/cache');
 
 seneca.ready(function(err) {
   seneca.act({role: 'cache', cmd: 'set', key: 'k1', val: 'v1'}, function(err) {
     seneca.act({role: 'cache', cmd: 'get', key: 'k1'}, function(err, out) {
-      console.log('value = ' + out)
+      console.log('value = ' + out.value)
     });
   });
 });
@@ -40,7 +42,7 @@ seneca.ready(function(err) {
 
 ```
 require('seneca')()
-  .use('seneca-cache')
+  .use('@seneca/cache')
 ```
 ## More Examples
 
@@ -68,10 +70,13 @@ If you're using this module and need help, you can:
 ### Options
 
 * `micro.expiry` : number <i><small>11111</small></i>
+* `lrucache.max` : number <i><small>9999</small></i>
+* `lrucache.maxAge` : number <i><small>3600000</small></i>
+* `lrucache.length` : function <i><small>n => n.length</small></i>
 
 Set plugin options when loading with:
 ```
-seneca.use('cache', { name: value, ... })
+seneca.use('@seneca/cache', { name: value, ... })
 
 ```
 <small>Note: <code>foo.bar</code> in the list above means 
@@ -198,10 +203,10 @@ All caching plugins, including this one, implement this action API.
 
 ### Options
 
-You can use any of the options from the [lru-cache](https://github.com/isaacs/node-lru-cache) module directly as options to this plugin:
+You can use any of the options of [lru-cache](https://github.com/isaacs/node-lru-cache) version 6 in the `lrucache` option. It is passed to lru-cache as it is, so options that are not listed above are accepted too:
 
 ```
-seneca.use('cached', {
+seneca.use('@seneca/cache', {
   lrucache: {
     max: 1000,
     maxAge: 1000 * 60 * 60,

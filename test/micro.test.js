@@ -1,19 +1,15 @@
-/* Copyright (c) 2012-2020 Richard Rodger, Seamus D'Arcy, and other contributors, MIT License */
+/* Copyright (c) 2012-2026 Richard Rodger, Seamus D'Arcy, and other contributors, MIT License */
 'use strict'
 
-const Util = require('util')
+const { describe, it } = require('node:test')
 
 const FakeTimers = require('@sinonjs/fake-timers')
-const Lab = require('@hapi/lab')
 const Code = require('@hapi/code')
-const lab = (exports.lab = Lab.script())
 const expect = Code.expect
-
-const describe = lab.describe
-const it = lab.it
 
 const Micro = require('../lib/micro')
 const Seneca = require('seneca')
+const Plugin = require('..')
 
 describe('micro', function () {
   it('happy', async () => {
@@ -282,13 +278,19 @@ describe('micro', function () {
       return { a: 1, d: Date.now(), c: aC++ }
     })
 
+    var a1def = si.find('a:1')
+
     var m0 = await si.post('role:cache,cmd:micro', {
       pin: 'a:1',
       pins: 'ignored',
       expiry: 10,
     })
     expect(m0.pins).equal([{ a: 1 }])
-    expect(si.find('a:1').priorpath).equals('a1_13;')
+
+    // The micro-cache wraps the original action, which becomes its prior.
+    var wrapdef = si.find('a:1')
+    expect(wrapdef.id).not.equal(a1def.id)
+    expect(wrapdef.priorpath).equals(a1def.id + ';')
 
     var a1o0 = await si.post('a:1')
     //console.log(a1o0)
@@ -336,6 +338,7 @@ describe('micro', function () {
           lr: 0.3333333333333333,
         })
 
+        await si.close()
         r()
       }, 222)
     )
@@ -343,5 +346,5 @@ describe('micro', function () {
 })
 
 function make_seneca() {
-  return Seneca({ legacy: false }).test().use('promisify').use('..')
+  return Seneca({ legacy: false }).test().use(Plugin)
 }
