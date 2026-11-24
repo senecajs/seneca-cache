@@ -1,13 +1,12 @@
 {
   "name": "@seneca/cache",
-  "version": "4.2.1",
+  "version": "5.0.0",
   "description": "In-memory caching plugin for seneca",
   "main": "cache.js",
   "scripts": {
-    "test": "lab -v -P test -t 100 -L -r console -o stdout -r html -o test/coverage.html",
+    "test": "node --test --experimental-test-coverage --test-coverage-include=cache.js --test-coverage-include=\"lib/**\" --test-coverage-exclude=\"test/**\" --test-coverage-lines=100 --test-coverage-branches=100 \"test/*.test.js\"",
     "doc": "seneca-doc",
     "prettier": "prettier --write *.js lib/*.js test/*.js",
-    "coveralls": "lab -s -P test -r lcov | coveralls",
     "clean": "rm -rf node_modules package-lock.json yarn.lock",
     "reset": "npm run clean && npm i && npm test",
     "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
@@ -16,7 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/senecajs/seneca-cache.git"
+    "url": "git+https://github.com/senecajs/seneca-cache.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "seneca",
@@ -33,21 +35,25 @@
     "lru-cache": "~6.0.0"
   },
   "devDependencies": {
-    "@hapi/code": "^8.0.1",
-    "@hapi/lab": "^22.0.4",
-    "@seneca/cache-test": "^2.0.0",
+    "@hapi/code": "^9.0.3",
+    "@seneca/cache-test": "^3.0.0",
+    "@seneca/doc": "^9.0.0",
     "@sinonjs/fake-timers": "^6.0.1",
-    "coveralls": "^3.1.0",
     "prettier": "^2.0.5",
-    "seneca": "^3.22.0",
-    "@seneca/doc": "^4.0.0",
-    "seneca-plugin-validator": "^0.6.1",
-    "seneca-promisify": "^2.0.0"
+    "seneca": "^4.0.0",
+    "seneca-plugin-validator": "^0.7.0"
   },
   "files": [
     "cache.js",
     "lib",
     "README.md",
-    "LICENSE.txt"
-  ]
+    "LICENSE.txt",
+    "CHANGES.md"
+  ],
+  "peerDependencies": {
+    "seneca": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }

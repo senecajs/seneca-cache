@@ -1,18 +1,26 @@
-/* Copyright (c) 2014-2020 Richard Rodger, Seamus D'Arcy, and other contributors, MIT License. */
+/* Copyright (c) 2014-2026 Richard Rodger, Seamus D'Arcy, and other contributors, MIT License. */
 'use strict'
 
 const LRU = require('lru-cache')
-const Jsonic = require('jsonic')
 
 const Micro = require('./lib/micro')
 
 module.exports = cache
 
-module.exports.defaults = {
+module.exports.defaults = ({ valid }) => ({
   micro: {
     expiry: 11111, // 10-ish seconds
   },
-}
+
+  // Passed to lru-cache as it is: any lru-cache option is accepted.
+  lrucache: valid.Open({
+    max: 9999,
+    maxAge: 1000 * 60 * 60,
+    length: function length(n) {
+      return n.length
+    },
+  }),
+})
 
 module.exports.errors = {
   key_exists: 'Key <%=key%> exists.',
@@ -23,19 +31,6 @@ module.exports.errors = {
 function cache(options) {
   var seneca = this
   var plugin = 'cache'
-
-  options = seneca.util.deepextend(
-    {
-      lrucache: {
-        max: 9999,
-        maxAge: 1000 * 60 * 60,
-        length: function (n) {
-          return n.length
-        },
-      },
-    },
-    options
-  )
 
   var cache = new LRU(options.lrucache)
   var micro = []
@@ -164,7 +159,7 @@ function cache(options) {
     pins = Array.isArray(pins)
       ? pins
       : 'string' === typeof pins
-      ? pins.split(';').map((pin) => Jsonic(pin))
+      ? pins.split(';').map((pin) => seneca.util.Jsonic(pin))
       : [Object.assign({}, pins)]
 
     pins.forEach((pin) => {
